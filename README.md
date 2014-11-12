@@ -14,7 +14,7 @@ from DirectPy import directv
 
 dtv = directv('192.168.1.10')   # Initiates a new object using the IP address of the receiver  
 dtv.get_tuned()                 # Gets the currently tuned channel  
-dtv.set_channel('249')          # Sets the channel to 249  
+dtv.tune_channel('249')         # Sets the channel to 249  
 dtv.get_channel('264')          # Gets information on the program that is on channel 264 currently  
 dtv.key_press('poweroff')       # Emulates pressing the power off button  
 dtv.key_press('poweron')        # Emulates pressing the power on button  

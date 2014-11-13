@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import requests
 
 class DIRECTV:
@@ -41,7 +42,7 @@ class DIRECTV:
         if minor == 65535:
             return major
         else:
-            return '%s-%s' % (major,minor)
+            return '%d-%d' % (major,minor)
 
     def get_standby(self):
         """Return standby status of the receiver."""
@@ -50,8 +51,10 @@ class DIRECTV:
         
         return self.standby
         
-    def get_channel(self, channel):
-        """Return program information for a channel. Specify a standard (249) or HD (249-1) channel."""
+    def get_channel(self, channel:"'###' or '###-#'"):
+        """Return program information for a channel."""
+        if not type(channel) is str:
+            raise TypeError('Channel should be a string')
         major,minor = self._parse_channel(channel)
         jResp = requests.get('%s/tv/getProgInfo?major=%s&minor=%s' % (self.base_url,major,minor)).json()
 
@@ -64,8 +67,10 @@ class DIRECTV:
         
         return jResp
 
-    def tune_channel(self, channel):
-        """Change the channel on the receiver. Specify a standard (249) or HD (249-1) channel."""
+    def tune_channel(self, channel:"'###' or '###-#'"):
+        """Change the channel on the receiver."""
+        if not type(channel) is str:
+            raise TypeError('Channel should be a string')
         major,minor = self._parse_channel(channel)
 
         jResp = requests.get('%s/tv/tune?major=%s&minor=%s' % (self.base_url,major,minor)).json()
@@ -74,8 +79,8 @@ class DIRECTV:
 
         return jResp
 
-    def key_press(self, key):
-        """Emulate pressing a key on the remote.
+    def key_press(self, key:str):
+        """Emulate pressing a key on the remote. See help() for supported keys.
 
         Supported keys: power, poweron, poweroff, format, 
         pause, rew, replay, stop, advance, ffwd, record, 
@@ -84,6 +89,8 @@ class DIRECTV:
         blue, chanup, chandown, prev, 0, 1, 2, 3, 4, 5, 
         6, 7, 8, 9, dash, enter
         """
+        if not type(key) is str:
+            raise TypeError('Key should be a string')
         if not key.lower() in self.valid_keys:
             raise ValueError('Invalid key: ' + key)
         

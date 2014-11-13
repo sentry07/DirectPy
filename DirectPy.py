@@ -40,7 +40,7 @@ class DIRECTV:
     def _combine_channel(major,minor):
         """Return the combined channel number. If minor == 65535, there is no minor channel number."""
         if minor == 65535:
-            return major
+            return str(major)
         else:
             return '%d-%d' % (major,minor)
 

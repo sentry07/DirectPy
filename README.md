@@ -13,7 +13,7 @@ Example use:
 from DirectPy import DIRECTV  
 
 \# Initiate a new object using the IP address of the receiver  
-dtv = directv('192.168.1.10')  
+dtv = DIRECTV('192.168.1.10')  
 
 \# Emulate pressing the power on button  
 dtv.key_press('poweron')        

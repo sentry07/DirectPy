@@ -71,7 +71,8 @@ class DIRECTV:
     def get_tuned(self):
         """Returns the channel and program information of the current channel."""
         jResp = requests.get('%s/tv/getTuned?clientAddr=%s' % (self.base_url,self.clientAddr)).json()
-        self.channel = self._combine_channel(jResp['major'],jResp['minor'])
+        if jResp['status']['code'] == 200: 
+			self.channel = self._combine_channel(jResp['major'],jResp['minor'])
         
         return jResp
 

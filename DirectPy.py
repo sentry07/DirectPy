@@ -54,7 +54,8 @@ class DIRECTV:
     def get_standby(self):
         """Return standby status of the receiver."""
         jResp = requests.get('%s/info/mode?clientAddr=%s' % (self.base_url,self.clientAddr)).json()
-        self.standby = (jResp['mode'] == 1)
+        if jResp['status']['code'] == 200: 
+            self.standby = (jResp['mode'] == 1)
         
         return self.standby
         
@@ -103,4 +104,11 @@ class DIRECTV:
         
         jResp = requests.get('%s/remote/processKey?key=%s&hold=keyPress&clientAddr=%s' % (self.base_url,key,self.clientAddr)).json()
 
+        return jResp
+
+    def get_locations(self):
+        """Returns the clientAddr for all devices."""
+        
+        jResp = requests.get('%s/info/getLocations' % (self.base_url)).json()
+        
         return jResp

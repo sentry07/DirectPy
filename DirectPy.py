@@ -56,7 +56,10 @@ class DIRECTV:
         jResp = requests.get('%s/info/mode?clientAddr=%s' % (self.base_url,self.clientAddr)).json()
         if jResp['status']['code'] == 200: 
             self.standby = (jResp['mode'] == 1)
-        
+		
+		elif jResp['status']['code'] == 403:
+            self.standby = 1
+
         return self.standby
         
     def get_channel(self, channel:"'###' or '###-#'"):

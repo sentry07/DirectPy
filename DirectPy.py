@@ -57,6 +57,7 @@ class DIRECTV:
         if jResp['status']['code'] == 200: 
             self.standby = (jResp['mode'] == 1)
 		
+		"""Handle clientAddrs that are offline/not reporting for some reason"""
 		elif jResp['status']['code'] == 403:
             self.standby = 1
 

@@ -2,7 +2,7 @@ DirectPy
 ========
 
 A Python 2.5+/3 library for interacting with DirecTV receivers. For more information on setting up your receiver to use the API, please see:  
-https://www.satinstalltraining.com/homeautomation/DTV-MD-0359-DIRECTV_SHEF_Command_Set-V1.3.C.pdf  
+http://forums.solidsignal.com/docs/DTV-MD-0359-DIRECTV_SHEF_Command_Set-V1.3.C.pdf
 
 This class import provides basic functions for controlling a DirecTV receiver, either by setting its
 channel directly or emulating remote button presses, as well as the ability to retrieve information

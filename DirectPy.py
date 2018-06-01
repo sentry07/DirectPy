@@ -30,7 +30,8 @@ class DIRECTV:
         self.base_url = 'http://%s:%s' % (ip,port)
 
         self.get_standby()
-        self.get_tuned()
+        if self.standby == False:
+            self.get_tuned()
 
     @staticmethod
     def _parse_channel(channel):

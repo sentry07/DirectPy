@@ -21,6 +21,9 @@ dtv.key_press('poweron')
 \# Get the currently tuned channel  
 dtv.get_tuned()  
 
+\# Get the currently tuned channel on PIP
+dtv.get_tuned('secondary')  
+
 \# Set the channel to 249  
 dtv.tune_channel('249')  
 
@@ -29,3 +32,13 @@ dtv.get_channel('264')
 
 \# Emulate pressing the power off button  
 dtv.key_press('poweroff')  
+
+\# Retrieve the different RVU's attached
+dtv.get_locations()
+
+\# Retrieve access card ID, receiver ID, STB software version, system time, and version of current implementation
+dtv.get_version()
+
+\# Retrieve serial number
+dtv.get_serialnum()
+

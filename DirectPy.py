@@ -21,8 +21,7 @@ class DIRECTV:
         self.port = port
         self.clientAddr = clientAddr
         self.standby = False
-        self.channel_primary = '0'
-        self.channel_secondary = '0'
+        self.channel = '0'
         self.valid_keys = ['power', 'poweron', 'poweroff', 'format', 'pause',
                            'rew', 'replay', 'stop', 'advance', 'ffwd',
                            'record', 'play', 'guide', 'active', 'list', 'exit',
@@ -82,20 +81,16 @@ class DIRECTV:
 
         return jResp
 
-    def get_tuned(self, videowindow='primary'):
+    def get_tuned(self):
         """Returns the channel and program information of the current
 
         channel."""
         jResp = requests.get(
-            '%s/tv/getTuned?clientAddr=%s&videoWindow=%s' %
-            (self.base_url, self.clientAddr, videowindow)).json()
+            '%s/tv/getTuned?clientAddr=%s' %
+            (self.base_url, self.clientAddr)).json()
         if jResp['status']['code'] == 200:
-            if videowindow == 'secondary':
-                self.channel_secondary = self._combine_channel(
-                    jResp['major'], jResp['minor'])
-            else:
-                self.channel_primary = self._combine_channel(
-                    jResp['major'], jResp['minor'])
+            self.channel = self._combine_channel(jResp['major'],
+                                                 jResp['minor'])
 
         return jResp
 
@@ -109,7 +104,7 @@ class DIRECTV:
             '%s/tv/tune?major=%s&minor=%s&clientAddr=%s' %
             (self.base_url, major, minor, self.clientAddr)).json()
         if jResp['status']['code'] == 200:
-            self.channel_primary = channel
+            self.channel = channel
 
         return jResp
 
@@ -150,7 +145,7 @@ class DIRECTV:
 
         return jResp
 
-    def get_serialnum(self):
+    def get_serial_num(self):
         """Returns the serial number."""
 
         jResp = requests.get('%s/info/getSerialNum' % (self.base_url)).json()

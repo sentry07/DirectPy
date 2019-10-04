@@ -15,6 +15,9 @@ from DirectPy import DIRECTV
 \# Initiate a new object using the IP address of the receiver
 dtv = DIRECTV('192.168.1.10')
 
+\# Initiate a new object using the IP address of the receiver and the MAC address of the client
+dtv = DIRECTV('192.168.1.10',clientAddr='000A959D6816')
+
 \# Emulate pressing the power on button
 dtv.key_press('poweron')
 

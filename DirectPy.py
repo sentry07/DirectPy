@@ -16,7 +16,7 @@ class DIRECTV:
     know the MAC address and reference it without colons.
     EX: DIRECTV('192.168.1.10',clientAddr='000A959D6816')
     """
-    def __init__(self, ip, port=8080, clientAddr='0'):
+    def __init__(self, ip, port=8080, clientAddr='0', determine_state=True):
         self.ip = ip
         self.port = port
         self.clientAddr = clientAddr
@@ -32,9 +32,10 @@ class DIRECTV:
 
         self.base_url = 'http://%s:%s' % (ip, port)
 
-        self.get_standby()
-        if not self.standby:
-            self.get_tuned()
+        if determine_state:
+            self.get_standby()
+            if not self.standby:
+                self.get_tuned()
 
     @staticmethod
     def _parse_channel(channel):
